@@ -7,35 +7,32 @@ const Reports = () => {
   const dispatch = useDispatch();
   const { items, sales } = useSelector(({ items, sales }) => ({
     items,
-    sales
+    sales,
   }));
 
   const itemsData = items.reduce(
     (final, { name, quantity, price }) => [...final, [name, quantity * price]],
-    [["Item", "Amount"]]
+    [["Item", "Amount"]],
   );
 
   const salesData = sales.reduce(
-    (final, { description: { name }, quantity, price }) => [
-      ...final,
-      [name, quantity * price]
-    ],
-    [["Sale", "Amount"]]
+    (final, { item, quantity, price }) => [...final, [item, quantity * price]],
+    [["Sale", "Amount"]],
   );
 
   const itemOptions = {
     responsive: true,
     plugins: {
       legend: {
-        position: "top"
-      }
+        position: "top",
+      },
     },
-    title: "Inventory Report"
+    title: "Inventory Report",
   };
 
   const salesOptions = {
     ...itemOptions,
-    title: "Sales Report"
+    title: "Sales Report",
   };
 
   useEffect(() => {

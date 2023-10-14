@@ -7,21 +7,21 @@ const AddUpdateNewItem = () => {
   const dispatch = useDispatch();
   const itemToBeUpdated = useSelector(({ itemToBeUpdated }) => itemToBeUpdated);
   const isUpdate = _.isEmpty(itemToBeUpdated);
-  const initialItemInput = {
-    name: "",
-    category: "",
-    quantity: 1,
-    price: 0
-  };
   const allCategories = [
     "Electronics",
     "Stationery",
     "Food",
     "Furniture",
-    "Sports"
+    "Sports",
   ];
+  const initialItemInput = {
+    name: "",
+    category: allCategories[0],
+    quantity: 1,
+    price: 0,
+  };
   const [itemInput, setItemInput] = useState(
-    isUpdate ? initialItemInput : itemToBeUpdated
+    isUpdate ? initialItemInput : itemToBeUpdated,
   );
 
   const formSubmitHandler = (e) => {
@@ -31,7 +31,7 @@ const AddUpdateNewItem = () => {
       name: itemInput.name,
       category: itemInput.category,
       price: itemInput.price,
-      quantity: itemInput.quantity
+      quantity: itemInput.quantity,
     };
     isUpdate
       ? dispatch(addItem(itemInput))
@@ -66,7 +66,7 @@ const AddUpdateNewItem = () => {
           onChange={(e) =>
             setItemInput({
               ...itemInput,
-              category: e.target.value
+              category: e.target.value,
             })
           }
           required
